@@ -26,12 +26,12 @@ fun main() {
     """.trimMargin()
     fun compute_print(str : String) = { println(str) }()
     var a = 1.0
-    val b = 1 + a
-    val str: String = """Data:
+    var b = 1 + a
+    var str: String = """Data:
         |a = $a
         |b = $b
     """.trimMargin()
-    val print: Unit = { println(str) }()
+    var print: Unit = { println(str) }()
     a += 10
     b= compute_b(a)
     str = compute_str(a,b)
