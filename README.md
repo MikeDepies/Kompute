@@ -5,10 +5,13 @@ Current Status:
 Currently the plugin is targeting any function with the @Komputive annotation. The plug searches for var and val declarations in the function body. Hoists their initializer into a function. Captures some metadata about identifiers, types and dependencies. Then the plugin finds each assignment of a reactive var and calls a computation function for each dependent declaration. This process propagates untill all values have been inlined to update. 
 
 Current Watcher function syntax is:
+
   ```val someWatcher : Unit = { println(someWatchedVar) }()```
   
   Honestly the currently syntax is very flexible and will pick up usages of other variables and react to their changes. So a format like this could also exist. 
+  
 ```"$a $b $c".also { /*do some side effect */ } ```
+
 The biggest issue with this is that you must execute right away. This can be remedied with a more formal solution.
 
 
