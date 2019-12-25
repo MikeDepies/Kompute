@@ -1,7 +1,7 @@
 # Kompute
 Kotlin Compiler plugin bringing reactivity to variable declarations.
 ### Example:
-```
+```kotlin
 @Komputive fun main() {
     var a = 1.0
     val b = 1 + a
@@ -17,7 +17,7 @@ Kotlin Compiler plugin bringing reactivity to variable declarations.
 ```
 
 gets translated to:
-```
+```kotlin
 fun main() {
     fun compute_b(a : Int) = 1 + a
     fun compute_str(a: Int, b:Int) = """Data:
