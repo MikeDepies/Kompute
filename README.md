@@ -1,5 +1,51 @@
 # Kompute
 Kotlin Compiler plugin bringing reactivity to variable declarations.
+### Example:
+``` @Komputive fun main() {
+    var a = 1.0
+    val b = 1 + a
+    val str: String = """Data:
+        |a = $a
+        |b = $b
+    """.trimMargin()
+    val print: Unit = { println(str) }()
+    a += 10
+    a = 100
+    a = -5
+} 
+```
+
+gets translated to:
+```fun main() {
+    fun compute_b(a : Int) = 1 + a
+    fun compute_str(a: Int, b:Int) = """Data:
+        |a = $a
+        |b = $b
+    """.trimMargin()
+    fun compute_print(str : String) = { println(str) }()
+    var a = 1.0
+    val b = 1 + a
+    val str: String = """Data:
+        |a = $a
+        |b = $b
+    """.trimMargin()
+    val print: Unit = { println(str) }()
+    a += 10
+    b= compute_b(a)
+    str = compute_str(a,b)
+    print = compute_print(str)
+    a = 100
+    
+    b= compute_b(a)
+    str = compute_str(a,b)
+    print = compute_print(str)
+    a = -5
+    
+    b= compute_b(a)
+    str = compute_str(a,b)
+    print = compute_print(str)
+} 
+```
 
 Current Status:
 Currently the plugin is targeting any function with the @Komputive annotation. The plug searches for var and val declarations in the function body. Hoists their initializer into a function. Captures some metadata about identifiers, types and dependencies. Then the plugin finds each assignment of a reactive var and calls a computation function for each dependent declaration. This process propagates untill all values have been inlined to update. 
