@@ -71,3 +71,4 @@ This is a work in progress and is currently serving as a learning project.
 - Reactive Classes: Seems logical to extend this behavior to classes to create reactive data objects
 - Handle variable declarations without initalizers?
 - Stop hoisting var declarations since they are not reactive to other properties.
+- memoization to prevent needless update propagations
