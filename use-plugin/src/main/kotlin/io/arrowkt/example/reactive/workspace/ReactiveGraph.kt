@@ -1,7 +1,8 @@
 package io.arrowkt.example.reactive.workspace
 
 //metadebug
-fun main() {
+
+@Komputive fun main() {
     var a = 1.0
     var b = 1
     val c: Double = 1 + a

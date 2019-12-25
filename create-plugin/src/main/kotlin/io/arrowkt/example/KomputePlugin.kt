@@ -20,7 +20,7 @@ val Meta.kompute: Plugin
         "Kompute" {
             val compilerContext = this
             meta(
-                    namedFunction({ name == "main" }) { e ->
+                    namedFunction({ annotationEntries.any { it.text == "@Komputive" }}) { e ->
                         val dictionary = DictionaryImpl(mutableMapOf(), mutableMapOf(), mutableMapOf())
                         val children = value.getChildrenOfType<PsiElement>()
                         val variableDeclarations = value.collectDescendantsOfType<KtVariableDeclaration>()
@@ -33,6 +33,7 @@ val Meta.kompute: Plugin
                         }
                         val newBody = body?.value?.children?.fold("") { acc, psiElement -> buildBody(psiElement, dictionary, acc) }
                         val newScope = """fun $name $`(params)` {
+                            |   println("${e.annotationEntries.first().text}")
                             |   ${functions.fold("") { acc, namedFunction -> "$acc \n $namedFunction" }}
                             |   $newBody
                             |}
