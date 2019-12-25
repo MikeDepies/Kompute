@@ -17,7 +17,8 @@ Kotlin Compiler plugin bringing reactivity to variable declarations.
 ```
 
 gets translated to:
-```fun main() {
+```
+fun main() {
     fun compute_b(a : Int) = 1 + a
     fun compute_str(a: Int, b:Int) = """Data:
         |a = $a
