@@ -1,7 +1,8 @@
 # Kompute
 Kotlin Compiler plugin bringing reactivity to variable declarations.
 ### Example:
-``` @Komputive fun main() {
+```
+@Komputive fun main() {
     var a = 1.0
     val b = 1 + a
     val str: String = """Data:
