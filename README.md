@@ -6,6 +6,10 @@ Currently the plugin is targeting any function with the @Komputive annotation. T
 
 Current Watcher function syntax is:
   ```val someWatcher : Unit = { println(someWatchedVar) }()```
+  
+  Honestly the currently syntax is very flexible and will pick up usages of other variables and react to their changes. So a format like this could also exist. 
+```"$a $b $c".also { /*do some side effect */ } ```
+The biggest issue with this is that you must execute right away. This can be remedied with a more formal solution.
 
 
 This is a work in progress and is currently serving as a learning project.
