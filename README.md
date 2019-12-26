@@ -106,6 +106,20 @@ Current Watcher function syntax is:
 
 The biggest issue with this is that you must execute right away. This can be remedied with a more formal solution.
 
+#### Potential Syntax for Watch Functions
+```kotlin
+Watch { //automatic hoisting of dependencies used in block function
+    println("some $input was entered and uppercased: $upperInput")
+}
+Watch(watch(input, upperInput)) { //explicity defined variables to watch
+    //do some stuff
+}
+watch(input, upperInput) andDo { //explicity defined variables to watch
+
+}
+```
+
+
 
 ## TODO
 - Type inference: Need to figure out how to resolve a type on a declaration without explicit Type.
