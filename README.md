@@ -72,3 +72,4 @@ This is a work in progress and is currently serving as a learning project.
 - Handle variable declarations without initalizers?
 - Stop hoisting var declarations since they are not reactive to other properties.
 - memoization to prevent needless update propagations
+- create counterpart ide plugin: Provide markers to help reveal teh dependency behavior.
