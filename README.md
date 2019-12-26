@@ -3,7 +3,7 @@ Kotlin Compiler plugin bringing reactivity to variable declarations.
 
 This is a work in progress and is currently serving as a learning project. The basic effect is to be able to be able to write variable declarations that automatically watch for changes in any variable that would cause its value to be stale.
 
-So for example if we take a simple declartion:
+So for example if we take a simple declaration:
 ```kotlin
 @Komputive fun main() {
     var input : String = "some user input"
