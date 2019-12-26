@@ -8,11 +8,11 @@ So for example if we take a simple declaration:
 @Komputive fun main() {
     var input : String = "some user input"
     val upperInput : String = input.toUpperCase()
-    val validInput : Boolean = input.length > 12
+    val validInput : Boolean = input.length < 20
     //..
     println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
     //reasign the input
-    input = "different input"
+    input = "much longer invalid input"
     println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
 }
 ```
@@ -23,9 +23,9 @@ In this contrived example we set up some relationships with our variables. As ou
 input : some user input 
 uppercasedInput : SOME USER INPUT 
 validInput : true
-input : different input 
-uppercasedInput : DIFFERENT INPUT 
-validInput : true
+input : much longer invalid input 
+uppercasedInput : MUCH LONGER INVALID INPUT 
+validInput : false
 ```
 
 ### Example:
