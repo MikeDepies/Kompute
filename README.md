@@ -3,45 +3,61 @@ Kotlin Compiler plugin bringing reactivity to variable declarations.
 ### Example:
 ```kotlin
 @Komputive fun main() {
-    var a = 1.0
-    val b = 1 + a
+    var a : Double = 1.0
+    val b : Double = 1 + a
     val str: String = """Data:
         |a = $a
         |b = $b
     """.trimMargin()
     val print: Unit = { println(str) }()
     a += 10
-    a = 100
-    a = -5
-} 
+    a = 100.0
+    a = -5.0
+}
 ```
 
-gets translated to:
+produces the following console output:
+```
+Data:
+a = 1.0
+b = 2.0
+Data:
+a = 11.0
+b = 12.0
+Data:
+a = 100.0
+b = 101.0
+Data:
+a = -5.0
+b = -4.0
+```
+
+The compiler plugin translates the example code into the following
 ```kotlin
 fun main() {
-    fun compute_b(a : Int) = 1 + a
-    fun compute_str(a: Int, b:Int) = """Data:
+    fun compute_b(a : Double) = 1 + a
+    fun compute_str(a: Double, bDoubleInt) = """Data:
         |a = $a
         |b = $b
     """.trimMargin()
     fun compute_print(str : String) = { println(str) }()
-    var a = 1.0
-    var b = 1 + a
+    var a : Double = 1.0
+    var b : Double = 1 + a
     var str: String = """Data:
         |a = $a
         |b = $b
     """.trimMargin()
     var print: Unit = { println(str) }()
-    a += 10
+    a += 10.0
     b= compute_b(a)
     str = compute_str(a,b)
     print = compute_print(str)
-    a = 100
+    a = 100.0
     
     b= compute_b(a)
     str = compute_str(a,b)
     print = compute_print(str)
-    a = -5
+    a = -5.0
     
     b= compute_b(a)
     str = compute_str(a,b)
