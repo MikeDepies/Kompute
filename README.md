@@ -1,5 +1,33 @@
 # Kompute
 Kotlin Compiler plugin bringing reactivity to variable declarations.
+
+This is a work in progress and is currently serving as a learning project. The basic effect is to be able to be able to write variable declarations that automatically watch for changes in any variable that would cause its value to be stale.
+
+So for example if we take a simple declartion:
+```kotlin
+@Komputive fun main() {
+    var input : String = "some user input"
+    val upperInput : String = input.toUpperCase()
+    val validInput : Boolean = input.length > 12
+    //..
+    println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
+    //reasign the input
+    input = "different input"
+    println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
+}
+```
+
+In this contrived example we set up some relationships with our variables. As our root state changes, input, our derivative states, upperInput and validInput, automatically update. Below is the console output from the above code.
+```kotlin
+@Komputive
+input : some user input 
+uppercasedInput : SOME USER INPUT 
+validInput : true
+input : different input 
+uppercasedInput : DIFFERENT INPUT 
+validInput : true
+```
+
 ### Example:
 ```kotlin
 @Komputive fun main() {
@@ -78,8 +106,6 @@ Current Watcher function syntax is:
 
 The biggest issue with this is that you must execute right away. This can be remedied with a more formal solution.
 
-
-This is a work in progress and is currently serving as a learning project.
 
 ## TODO
 - Type inference: Need to figure out how to resolve a type on a declaration without explicit Type.
