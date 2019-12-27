@@ -128,4 +128,6 @@ watch(input, upperInput) andDo { //explicity defined variables to watch
 - Handle variable declarations without initalizers?
 - ~~Stop hoisting var declarations since they are not reactive to other properties.~~
 - memoization to prevent needless update propagations
-- create counterpart ide plugin: Provide markers to help reveal teh dependency behavior.
+- create counterpart ide plugin: Provide markers to help reveal the dependency behavior.
+- More finegrain control on what is "komputive" and what is not. 
+    - Suggestion[moriturius]: allow particular declaration statements be targeted with the @komputive annotation
