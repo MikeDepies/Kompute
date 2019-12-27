@@ -131,3 +131,5 @@ watch(input, upperInput) andDo { //explicity defined variables to watch
 - create counterpart ide plugin: Provide markers to help reveal the dependency behavior.
 - More finegrain control on what is "komputive" and what is not. 
     - Suggestion[moriturius]: allow particular declaration statements be targeted with the @komputive annotation
+- Readdress design decision to hoist relatinoships into functions. Nothing here is set in stone and was just a first comes to mind implemenation while learning arrow-meta.
+    - Alternative: Could inline the expression at each location.
