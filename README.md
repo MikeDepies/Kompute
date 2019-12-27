@@ -129,6 +129,7 @@ watch(input, upperInput) andDo { //explicity defined variables to watch
 - ~~Stop hoisting var declarations since they are not reactive to other properties.~~
 - memoization to prevent needless update propagations
 - create counterpart ide plugin: Provide markers to help reveal the dependency behavior.
+    - circiular dependency detection
 - More finegrain control on what is "komputive" and what is not. 
     - Suggestion[moriturius]: allow particular declaration statements be targeted with the @komputive annotation
 - Readdress design decision to hoist relatinoships into functions. Nothing here is set in stone and was just a first comes to mind implemenation while learning arrow-meta.
