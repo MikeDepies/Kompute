@@ -66,8 +66,8 @@ private fun CompilerContext.buildBody(psiElement: PsiElement, dictionary: Dictio
     }
 }
 
-fun CompilerContext.createComputeFun(element: ReactiveElement, dependencies: Set<ReactiveElement>): NamedFunction {
-    return """fun compute_${element.name}(${dependencies.joinToString(", ") { "${it.name} : ${it.type}" }}) : ${element.type} = ${element.declaration.initializer?.text}.also { println("compute_${element.name}") }""".trimMargin().function
+fun CompilerContext.createComputeFun(element: ReactiveElement, dependencies: Set<ReactiveElement>): NamedFunction { //.also { println("compute_${element.name}") }
+    return """fun compute_${element.name}(${dependencies.joinToString(", ") { "${it.name} : ${it.type}" }}) : ${element.type} = ${element.declaration.initializer?.text}""".trimMargin().function
 }
 
 fun CompilerContext.useComputeFun(element: ReactiveElement, dependencies: Set<ReactiveElement>): String {

@@ -1,23 +1,36 @@
 package io.arrowkt.example.reactive.workspace
 
 //metadebug
-
 @Komputive fun main() {
-    var a = 1.0
-    var b = 1
-    val c: Double = 1 + a
-    val d: Double = b + c
-    val str: String = """Data:
-        |a = $a
-        |b = $b
-        |c = $c
-        |d = $d
-    """.trimMargin()
-    val print: Unit = { println(str) }()
-    a += 10
-    b = 10
-    a = b.toDouble()
+    var input : String = "some user input"
+    val upperInput : String = input.toUpperCase()
+    val validInput : Boolean = input.length < 20
+    //..
+    println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
+    //reasign the input
+    input = "much longer invalid input"
+    println("input : $input \nuppercasedInput : $upperInput \nvalidInput : $validInput")
+    Watch {
+        println("some $input was entered and uppercased: $upperInput")
+    }
+    Watch(watch(input, upperInput)) {
+        //do some stuff
+    }
+    watch(input, upperInput) andDo {
+
+    }
+    //windowing tool:
+    //fold(input) { }
+    //buffer(x,y) { }
+    //
 }
+
+@Komputive fun test() {
+    var input = 0
+//    val avg =
+}
+//watch(a,b,c) andDo { }
+//annotation class Watch
 
 /*
 
