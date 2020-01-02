@@ -33,7 +33,7 @@ fun someUsageCode() {
 In order for the above code to work we will need to also create an IDE plugin to help the ide know what usage of the komputive pipe looks like. 
 
 
-##Generated [draft]
+## Generated [draft]
 ```kotlin
 interface `KP$SomeCalc` {
     val input: Int
