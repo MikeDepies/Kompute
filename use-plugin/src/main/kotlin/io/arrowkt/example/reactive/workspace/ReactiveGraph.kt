@@ -27,6 +27,9 @@ fun main() {
     //buffer(x,y) { }
     //
 }
+fun test2() : Unit {
+
+}
 
 @Komputive
 fun test() {
@@ -36,7 +39,7 @@ fun test() {
 //watch(a,b,c) andDo { }
 //annotation class Watch
 
-fun someUsageCode() {
+/*fun someUsageCode() {
     var input = 10
     val windowSize = 2
     val calc = `@someCalc`(input, windowSize)
@@ -49,7 +52,7 @@ fun someUsageCode() {
     (0 until 10).forEach {
         input = random.nextInt(100)
     }
-}
+}*/
 
 /**
 watch(calc.avg)() {
@@ -58,7 +61,7 @@ watch(calc.avg)() {
     println(avg)
 }
  */
-
+/*
 @Komputive
 fun someCalc(input: Int, windowSize: Int): Double? {
     //initalized values are for first call
@@ -102,7 +105,7 @@ fun initalizeSomeCalc(input: Int, windowSize: Int): `KP$SomeCalc` {
             avg = if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
         }
     }
-}
+}*/
 /*
 
 fun original() {

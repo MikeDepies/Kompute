@@ -1,0 +1,76 @@
+
+plugins {
+    id "org.jetbrains.kotlin.jvm"
+    id "com.github.johnrengelman.shadow"
+    id "org.jetbrains.intellij" version "$INTELLIJ_GRADLE_PLUGIN_VERSION"
+}
+apply plugin: 'org.jetbrains.intellij'
+
+repositories {
+    maven {
+        url "https://www.jetbrains.com/intellij-repository/snapshots"
+    }
+}
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+    compile "org.celtric.kotlin:kotlin-html:$KOTLIN_HTML_VERSION"
+    compileOnly "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
+    compileOnly "io.arrow-kt:arrow-meta-compiler-plugin:$ARROW_META_VERSION"
+    compileOnly "io.arrow-kt:arrow-meta-idea-plugin:$ARROW_META_VERSION"
+
+    compile project(path: ':create-plugin', configuration: 'shadow')
+
+}
+
+
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "$JVM_TARGET_VERSION"
+    }
+}
+
+// Create a new JAR with: Arrow Meta + new plugin
+shadowJar {
+    configurations = [project.configurations.compileOnly]
+    dependencies {
+        exclude("org.jetbrains.kotlin:kotlin-stdlib")
+        exclude("org.jetbrains.kotlin:kotlin-compiler-embeddable")
+    }
+}
+
+/*
+
+jar {
+    manifest {
+        attributes["Specification-Title"] = project.name
+        attributes["Specification-Version"] = project.version
+        attributes["Implementation-Title"] = "arrow.meta.plugin.idea"
+        attributes["Implementation-Version"] = project.version
+    }
+}
+*/
+
+buildSearchableOptions.enabled = false
+
+intellij {
+    version = "$INTELLIJ_IDEA_VERSION"
+    pluginName = "Kompute Plugin"
+    plugins = ["gradle", "java", "org.jetbrains.kotlin:${KOTLIN_IDEA_VERSION}"]
+}
+
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
+
+runIde {
+    jvmArgs '-Xmx2G'
+}
+
+test {
+    testLogging.showStandardStreams = true
+}
+
+//apply from: 'https://raw.githubusercontent.com/arrow-kt/arrow/master/gradle/gradle-mvn-push.gradle'

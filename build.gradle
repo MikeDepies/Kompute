@@ -1,11 +1,60 @@
-plugins {
-    id "org.jetbrains.kotlin.jvm" version "$KOTLIN_VERSION" apply false
-    id "com.github.johnrengelman.shadow" version "$SHADOW_JAR_VERSION" apply false
-}
 
-allprojects {
+buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
     }
+    dependencies {
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$DOKKA_VERSION"
+        classpath "io.arrow-kt:ank-gradle-plugin:$ANK_GRADLE_PLUGIN_VERSION"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+        classpath "org.jetbrains.kotlin.kapt:org.jetbrains.kotlin.kapt.gradle.plugin:$KOTLIN_VERSION"
+    }
+}
+
+plugins {
+    // Replace plugin DSL by legacy plugin application to use EAP versions by Kotlin
+    // id 'org.jetbrains.kotlin.jvm' version "$KOTLIN_VERSION"
+    // id 'org.jetbrains.kotlin.kapt' version "$KOTLIN_VERSION"
+    id 'com.github.johnrengelman.shadow' version "$SHADOW_JAR_VERSION"
+    id 'com.jfrog.bintray' version "$BINTRAY_VERSION"
+}
+
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "org.jetbrains.kotlin.kapt"
+
+allprojects {
+    clean.doFirst {
+        delete "${rootDir}/infographic/arrow-infographic.txt"
+        delete pathApiDocs
+    }
+
+    repositories {
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven {
+            url "https://dl.bintray.com/arrow-kt/arrow-kt/"
+            content {
+                includeGroup "io.arrow-kt"
+            }
+        }
+        mavenCentral()
+        jcenter()
+        maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task buildMeta {
+//    dependsOn 'clean'
+//    dependsOn 'build'
+//    dependsOn ':gradle-plugin:publishArrowPluginMarkerMavenPublicationToMavenLocal'
+//    dependsOn ':gradle-plugin:publishPluginMavenPublicationToMavenLocal'
+//    tasks.findByPath(':gradle-plugin:publishArrowPluginMarkerMavenPublicationToMavenLocal').mustRunAfter 'build'
+//    tasks.findByPath(':gradle-plugin:publishPluginMavenPublicationToMavenLocal').mustRunAfter 'build'
+}
+
+task publishAndRunIde {
+//    dependsOn ':buildMeta'
+    dependsOn ':idea-plugin:runIde'
+    tasks.findByPath(':idea-plugin:runIde')
 }
