@@ -15,7 +15,7 @@ fun someCalc(input: Int, windowSize: Int): Double? {
 And using the komputive pipe will look something like this. 
 ```kotlin
 fun someUsageCode() {
-    var input = 10
+    @Komputive var input = 10
     val windowSize = 2
     val calc = someCalc(input, windowSize) //swap the return type to the generated interface in compiler pugin + ide plugin
     watch(calc.avg)() {
@@ -59,6 +59,24 @@ fun initalizeSomeCalc(input: Int, windowSize: Int): `KP$SomeCalc` {
             if (elements.size > windowSize) elements.remove(0)
             avg = if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
         }
+    }
+}
+```
+
+```kotlin
+fun someUsageCode() {
+    var input = 10
+    val windowSize = 2
+    val calc = someCalc(input, windowSize) //swap the return type to the generated interface in compiler pugin + ide plugin
+    fun watch_calcAvg(avg : Double?) {
+        if (avg != null)
+        println(avg)
+    }
+    val random = Random(0)
+    (0 until 10).forEach {
+        input = random.nextInt(100)
+        calc(input, windowSize)
+        watch_calc(calc.avg)
     }
 }
 ```
