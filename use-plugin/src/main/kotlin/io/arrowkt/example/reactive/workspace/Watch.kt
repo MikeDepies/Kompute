@@ -8,5 +8,5 @@ fun watch(vararg property : Any?) : WatchContext = TODO()
 
 interface WatchContext
 object ExtractDependencies : WatchContext
-
+operator fun WatchContext.invoke(block: () -> Unit) : Unit = TODO()
 infix fun WatchContext.andDo(block: () -> Unit) : Unit = TODO()

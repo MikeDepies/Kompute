@@ -1,0 +1,64 @@
+```kotlin
+@Komputive
+fun someCalc(input: Int, windowSize: Int): Double? {
+    //initalized values are for first call
+    val elements = mutableListOf<Int>()
+    //how to signal that this is suppose ot happen on each successive change
+    //Do block for each time a input or windowSize changes {
+    elements += input
+    if (elements.size > windowSize) elements.remove(0)
+    val avg: Double? = if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
+    return avg
+    // }
+}
+```
+And using the komputive pipe will look something like this. 
+```kotlin
+fun someUsageCode() {
+    var input = 10
+    val windowSize = 2
+    val calc = someCalc(input, windowSize) //swap the return type to the generated interface in compiler pugin + ide plugin
+    watch(calc.avg)() {
+        val avg = calc.avg
+        if (avg != null)
+        println(avg)
+    }
+    val random = Random(0)
+    (0 until 10).forEach {
+        input = random.nextInt(100)
+    }
+}
+```
+
+In order for the above code to work we will need to also create an IDE plugin to help the ide know what usage of the komputive pipe looks like. 
+
+
+##Generated [draft]
+```kotlin
+interface `KP$SomeCalc` {
+    val input: Int
+    val windowSize: Int
+    val avg: Double?
+    //Possibly generate some meta data about input or output. Or maybe atleast a designated return type?
+    operator fun invoke(input: Int, windowSize: Int)
+}
+```
+This function replaces any reference/usage of someCalc. This creates a dynamic container on the fly with all of the necessary properties defined in the komputive pipe format. The interface also gets a implementation of the calculation on the invoke operator. This will be used to invoke new updates to the reactive komputive pipe when its dependencies are reassigned. 
+```kotlin
+fun initalizeSomeCalc(input: Int, windowSize: Int): `KP$SomeCalc` {
+    val elements = mutableListOf<Int>()
+    fun compute_avg(input: Int, windowSize: Int): Double? {
+        return if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
+    }
+    return object : `KP$SomeCalc` {
+        override var input: Int = input
+        override var windowSize: Int = windowSize
+        override var avg: Double? = compute_avg(input, windowSize)
+        override operator fun invoke(input: Int, windowSize: Int) {
+            elements += input
+            if (elements.size > windowSize) elements.remove(0)
+            avg = if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
+        }
+    }
+}
+```
