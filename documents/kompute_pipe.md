@@ -57,7 +57,7 @@ fun initalizeSomeCalc(input: Int, windowSize: Int): `KP$SomeCalc` {
         override operator fun invoke(input: Int, windowSize: Int) {
             elements += input
             if (elements.size > windowSize) elements.remove(0)
-            avg = if (elements.size < windowSize) null else elements.sum() / windowSize.toDouble()
+            avg = compute_avg(input, windowSize)
         }
     }
 }
