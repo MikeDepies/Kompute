@@ -85,18 +85,17 @@ fun someUsageCode() {
 ## State Objects
 
 ```kotlin
+
 @Kompute
 data class Window<T>(
         @Komputive
         val size: Int,
         @Komputive
-        private val _elements: MutableList<T> = mutableListOf<T>()) {
-
-    val elements: List<T> get() = _elements
+        val elements: MutableList<T>) {
 
     init {
-        watch(_elements)() {
-            while (_elements.size > size) _elements.removeAt(0)
+        watch(elements)() {
+            while (elements.size > size) elements.removeAt(0)
         }
     }
 }
@@ -104,7 +103,7 @@ data class Window<T>(
 @Kompute
 fun window(input: Int, size: Int): Window<Int> {
     val elements = mutableListOf<Int>()
-    @Komputive val window = Window<Int>(size = size, _elements = (elements + input).toMutableList())
+    @Komputive val window = Window<Int>(size = size, elements = (elements + input).toMutableList())
     return window
 }
 
@@ -113,10 +112,10 @@ fun example() {
     val periods = 7;
     val window = window(input, periods)
     val avg = window.elements.sum().toDouble() / window.size
+    val random = Random(0)
     Watch {
         println("$avg")
     }
-    val random = Random(0)
     (0 until 10).forEach {
         input = random.nextInt(100)
     }
