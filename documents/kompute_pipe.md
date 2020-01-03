@@ -113,6 +113,9 @@ fun example() {
     val periods = 7;
     val window = window(input, periods)
     val avg = window.elements.sum().toDouble() / window.size
+    Watch {
+        println("$avg")
+    }
     val random = Random(0)
     (0 until 10).forEach {
         input = random.nextInt(100)
