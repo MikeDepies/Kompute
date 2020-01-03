@@ -112,7 +112,7 @@ infix fun <T> T.accumulate(acc: (T) -> T): T = this
 
 fun example() {
     var input: Int = 10
-    val periods = 7;
+    val periods = 7
     val window = window(input, periods)
     val avg = window.elements.sum().toDouble() / window.size
     val random = Random(0)
