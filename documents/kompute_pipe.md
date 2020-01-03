@@ -88,11 +88,8 @@ fun someUsageCode() {
 
 @Kompute
 data class Window<T>(
-        @Komputive
         val size: Int,
-        @Komputive
         val elements: MutableList<T>) {
-
     init {
         watch(elements)() {
             while (elements.size > size) elements.removeAt(0)
@@ -103,9 +100,15 @@ data class Window<T>(
 @Kompute
 fun window(input: Int, size: Int): Window<Int> {
     val elements = mutableListOf<Int>()
-    @Komputive val window = Window<Int>(size = size, elements = (elements + input).toMutableList())
+    @Komputive val window = Window<Int>(
+            size = size,
+            elements = mutableListOf<Int>() collect {
+                it += input
+            })
     return window
 }
+infix fun <T> T.collect(acc: (T) -> Unit): T = this
+infix fun <T> T.accumulate(acc: (T) -> T): T = this
 
 fun example() {
     var input: Int = 10
