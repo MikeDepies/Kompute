@@ -101,20 +101,19 @@ infix fun <T> T.collect(acc: (T) -> Unit): T = this
 infix fun <T> T.accumulate(acc: (T) -> T): T = this
 
 fun example() {
-    var input: Int = 10
-    val periods = 7
+    @Komputive var input: Int = 10
     @Komputive val window = Window<Int>(
-            size = periods,
+            size = 4,
             elements = mutableListOf<Int>() collect {
                 it += input
             })
     val avg = window.elements.sum().toDouble() / window.size
-    val random = Random(0)
     Watch {
         println("$avg")
     }
+    //push data through
+    val random = Random(0)
     (0 until 10).forEach {
         input = random.nextInt(100)
     }
-}
 ```
