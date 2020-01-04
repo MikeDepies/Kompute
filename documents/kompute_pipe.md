@@ -100,21 +100,11 @@ data class Window<T>(
 infix fun <T> T.collect(acc: (T) -> Unit): T = this
 infix fun <T> T.accumulate(acc: (T) -> T): T = this
 
-fun example() {
-    @Komputive
-    var input: Int = 10
-    @Komputive
-    val window = Window(size = 4, elements = mutableListOf<Int>().collect { it += input })
-    val avg = window.elements.sum().toDouble() / window.size
-    Watch {
-        println("$avg")
-    }
-    //push data through
-    val random = Random(0)
-    (0 until 10).forEach {
-        input = random.nextInt(100)
-    }
-}
+@Komputive
+    val window = Window(
+            size = 4, 
+            elements = mutableListOf<Int>().collect { it += input }
+    
 ```
 Compiler generates the following
 ```kotlin
