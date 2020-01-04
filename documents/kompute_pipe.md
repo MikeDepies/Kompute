@@ -97,23 +97,17 @@ data class Window<T>(
     }
 }
 
-@Kompute
-fun window(input: Int, size: Int): Window<Int> {
-    val elements = mutableListOf<Int>()
-    @Komputive val window = Window<Int>(
-            size = size,
-            elements = mutableListOf<Int>() collect {
-                it += input
-            })
-    return window
-}
 infix fun <T> T.collect(acc: (T) -> Unit): T = this
 infix fun <T> T.accumulate(acc: (T) -> T): T = this
 
 fun example() {
     var input: Int = 10
     val periods = 7
-    val window = window(input, periods)
+    @Komputive val window = Window<Int>(
+            size = periods,
+            elements = mutableListOf<Int>() collect {
+                it += input
+            })
     val avg = window.elements.sum().toDouble() / window.size
     val random = Random(0)
     Watch {
