@@ -1,34 +1,35 @@
 ## Kompute Classes
 
 ```kotlin
+
 @Kompute
-class SomeCalculationTemplate(var input1 : Int, var input 2: Int) {
-        val sum = input1 + input 2
-        val window = 
-                Window(
+class SomeCalculationTemplate(var input1 : Int, var input2: Int) {
+    val sum = input1 + input2
+    val window =
+            Window(
                     size = 4,
-                    elements = mutableListOf<Int>(input).collect { it += input }
-                )
-        val avg = window.elements.average()
+                    elements = mutableListOf<Int>(sum).collect { it += sum }
+            )
+    val avg = window.elements.average()
 }
 
 @Kompute
-fun example(data : List<Pair<Int, Int>) {
-        @Komputive
-        val x = 0
-        @Komputive
-        val y = 0
-        
-        @Komputive
-        val calc = SomeCalculationTemplate(x,y)
-         
-        //non-existent charting api
-        watch(calc.avg) { plot(calv.avg) }
-        //read data into x & y
-        for(d in data) {
-                x = it.first
-                y = it.second
-        }
+fun example(data : List<Pair<Int, Int>>) {
+    @Komputive
+    var x = 0
+    @Komputive
+    var y = 0
+
+    @Komputive
+    val calc = SomeCalculationTemplate(x,y)
+
+    //non-existent charting api
+    watch(calc.avg) { plot(calc.avg) }
+    //read data into x & y
+    for(d in data) {
+        x = d.first
+        y = d.second
+    }
 }
 ```
 ===
