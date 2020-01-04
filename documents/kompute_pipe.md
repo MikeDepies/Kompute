@@ -107,10 +107,10 @@ fun example() {
     val window =
             Window(
                     size = 4,
-                    elements = mutableListOf<Int>().collect { it += input }
+                    elements = mutableListOf<Int>(input).collect { it += input }
             )
-    val avg = window.elements.sum().toDouble() / window.size
-    Watch {
+    val avg = window.elements.average()
+    watch(avg)() {
         println("$avg")
     }
     //push data through
