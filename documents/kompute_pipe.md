@@ -104,10 +104,11 @@ fun example() {
     @Komputive
     var input: Int = 10
     @Komputive
-    val window = Window(
-            size = 4,
-            elements = mutableListOf<Int>().collect { it += input }
-    )
+    val window =
+            Window(
+                    size = 4,
+                    elements = mutableListOf<Int>().collect { it += input }
+            )
     val avg = window.elements.sum().toDouble() / window.size
     Watch {
         println("$avg")
