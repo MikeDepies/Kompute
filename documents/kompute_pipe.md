@@ -78,7 +78,7 @@ fun kompute_example() {
     fun `collect_window(elements,input)`(elements: MutableList<Int>, input: Int) {
         elements += input
     }
-    fun compute_avg(window: Kompute_Window<Int>) = window.elements.sum().toDouble() / window.size
+    fun compute_avg(window: Kompute_Window<Int>) = window.elements.average() / window.size
     fun `compute_watch(avg)`(avg: Double) {
         println("$avg")
     }
